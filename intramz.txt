@@ -1,0 +1,310 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 16, 2024 at 01:44 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `intramz`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `athlete`
+--
+
+CREATE TABLE `athlete` (
+  `idNum` int(11) NOT NULL,
+  `eventID` int(11) NOT NULL,
+  `deptID` int(11) NOT NULL,
+  `lastName` varchar(200) NOT NULL,
+  `firstName` varchar(200) NOT NULL,
+  `middleInit` varchar(200) NOT NULL,
+  `course` varchar(200) NOT NULL,
+  `year` int(1) NOT NULL,
+  `civilStatus` varchar(200) NOT NULL,
+  `gender` varchar(200) NOT NULL,
+  `birthdate` date NOT NULL,
+  `contactNo` varchar(200) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `coachID` int(11) NOT NULL,
+  `deanID` int(11) NOT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `approveDate` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `athlete`
+--
+
+INSERT INTO `athlete` (`idNum`, `eventID`, `deptID`, `lastName`, `firstName`, `middleInit`, `course`, `year`, `civilStatus`, `gender`, `birthdate`, `contactNo`, `address`, `coachID`, `deanID`, `status`, `approveDate`) VALUES
+(11, 1, 1, 'Vinluan', 'Jeb', 'J', 'CCS', 1, 'single', 'male', '2000-04-09', '09485623598', 'Township', 5, 8, 'Disapproved', 'April 16 2024 01:42:35 PM'),
+(12, 1, 1, 'Sarona', 'Dwight', 'L', 'CCS', 1, 'single', 'male', '1999-08-20', '09710115436', 'Sto. Nino', 5, 8, NULL, NULL),
+(13, 1, 1, 'Luzano', 'Troy', 'C', 'CCS', 1, 'married', 'male', '1999-12-15', '09410066859', 'Lamac', 5, 8, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coach`
+--
+
+CREATE TABLE `coach` (
+  `userName` int(11) NOT NULL,
+  `fName` varchar(200) NOT NULL,
+  `lName` varchar(200) NOT NULL,
+  `mobile` varchar(200) NOT NULL,
+  `deptID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `coach`
+--
+
+INSERT INTO `coach` (`userName`, `fName`, `lName`, `mobile`, `deptID`) VALUES
+(5, 'Coach', 'Rinks', '9234234234', 1),
+(6, 'Coach', 'Gojo Saturo', '9534874235', 2),
+(7, 'Coach', 'Ramil De Jesus', '9134865105', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dean`
+--
+
+CREATE TABLE `dean` (
+  `userName` int(11) NOT NULL,
+  `fName` varchar(200) NOT NULL,
+  `lName` varchar(200) NOT NULL,
+  `mobile` varchar(200) NOT NULL,
+  `deptID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dean`
+--
+
+INSERT INTO `dean` (`userName`, `fName`, `lName`, `mobile`, `deptID`) VALUES
+(8, 'Neil', 'Basabe', '9568912697', 1),
+(9, 'Shinra', 'Tensie', '9751236586', 2),
+(10, 'Lebron', 'James', '9751200546', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `deptID` int(11) NOT NULL,
+  `deptName` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`deptID`, `deptName`) VALUES
+(1, 'CCS'),
+(2, 'BSBA'),
+(3, 'BSCRIM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event`
+--
+
+CREATE TABLE `event` (
+  `eventID` int(11) NOT NULL,
+  `category` varchar(200) NOT NULL,
+  `eventName` varchar(200) NOT NULL,
+  `noOfParticipant` int(11) NOT NULL,
+  `tournamentManager` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`eventID`, `category`, `eventName`, `noOfParticipant`, `tournamentManager`) VALUES
+(1, 'Athletic', 'Basketball', 400, 3),
+(2, 'Athletic', 'Volleyball', 300, 3),
+(3, 'Athletic', 'Football', 200, 3),
+(4, 'Athletic', 'Badminton', 100, 3),
+(5, 'Cultural', 'Dance Palabas', 600, 2),
+(6, 'Cultural', 'Cheer Dance', 600, 2),
+(7, 'Cultural', 'Sinulog Dance Showdown', 700, 2),
+(8, 'Academic', 'Math and Science Quiz Bee', 60, 4),
+(9, 'Academic', 'Science Fair', 40, 2),
+(10, 'Academic', 'Math Wizard', 50, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `regis`
+--
+
+CREATE TABLE `regis` (
+  `userName` int(11) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `confirmPassword` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `regis`
+--
+
+INSERT INTO `regis` (`userName`, `password`, `confirmPassword`, `role`) VALUES
+(1, '123', '123', 'admin'),
+(2, '123', '123', 'tournamentManager'),
+(3, '123', '123', 'tournamentManager'),
+(4, '123', '123', 'tournamentManager'),
+(5, '123', '123', 'coach'),
+(6, '123', '123', 'coach'),
+(7, '123', '123', 'coach'),
+(8, '123', '123', 'dean'),
+(9, '123', '123', 'dean'),
+(10, '123', '123', 'dean'),
+(11, '123', '123', 'student'),
+(12, '123', '123', 'student'),
+(13, '123', '123', 'student'),
+(14, '123', '123', 'student');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tournamentmanager`
+--
+
+CREATE TABLE `tournamentmanager` (
+  `userName` int(11) NOT NULL,
+  `fName` varchar(200) NOT NULL,
+  `lName` varchar(200) NOT NULL,
+  `mobile` varchar(200) NOT NULL,
+  `deptID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tournamentmanager`
+--
+
+INSERT INTO `tournamentmanager` (`userName`, `fName`, `lName`, `mobile`, `deptID`) VALUES
+(2, 'Historia', 'Reise', '9234234234', 2),
+(3, 'Levi', 'Ackermann', '9458731252', 3),
+(4, 'Erwin', 'Smith', '9568912697', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `athlete`
+--
+ALTER TABLE `athlete`
+  ADD PRIMARY KEY (`idNum`),
+  ADD KEY `eventID` (`eventID`),
+  ADD KEY `deptID` (`deptID`),
+  ADD KEY `coachID` (`coachID`),
+  ADD KEY `deanID` (`deanID`);
+
+--
+-- Indexes for table `coach`
+--
+ALTER TABLE `coach`
+  ADD PRIMARY KEY (`userName`),
+  ADD KEY `deptID` (`deptID`);
+
+--
+-- Indexes for table `dean`
+--
+ALTER TABLE `dean`
+  ADD PRIMARY KEY (`userName`),
+  ADD KEY `deptID` (`deptID`);
+
+--
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`deptID`);
+
+--
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`eventID`),
+  ADD KEY `tournamentManager` (`tournamentManager`);
+
+--
+-- Indexes for table `regis`
+--
+ALTER TABLE `regis`
+  ADD PRIMARY KEY (`userName`),
+  ADD UNIQUE KEY `userName` (`userName`);
+
+--
+-- Indexes for table `tournamentmanager`
+--
+ALTER TABLE `tournamentmanager`
+  ADD PRIMARY KEY (`userName`),
+  ADD KEY `deptID` (`deptID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `athlete`
+--
+ALTER TABLE `athlete`
+  ADD CONSTRAINT `athlete_ibfk_1` FOREIGN KEY (`idNum`) REFERENCES `regis` (`userName`),
+  ADD CONSTRAINT `athlete_ibfk_2` FOREIGN KEY (`eventID`) REFERENCES `event` (`eventID`),
+  ADD CONSTRAINT `athlete_ibfk_3` FOREIGN KEY (`deptID`) REFERENCES `department` (`deptID`),
+  ADD CONSTRAINT `athlete_ibfk_4` FOREIGN KEY (`coachID`) REFERENCES `coach` (`userName`),
+  ADD CONSTRAINT `athlete_ibfk_5` FOREIGN KEY (`deanID`) REFERENCES `dean` (`userName`);
+
+--
+-- Constraints for table `coach`
+--
+ALTER TABLE `coach`
+  ADD CONSTRAINT `coach_ibfk_1` FOREIGN KEY (`deptID`) REFERENCES `department` (`deptID`),
+  ADD CONSTRAINT `coach_ibfk_2` FOREIGN KEY (`userName`) REFERENCES `regis` (`userName`);
+
+--
+-- Constraints for table `dean`
+--
+ALTER TABLE `dean`
+  ADD CONSTRAINT `dean_ibfk_1` FOREIGN KEY (`userName`) REFERENCES `regis` (`userName`),
+  ADD CONSTRAINT `dean_ibfk_2` FOREIGN KEY (`deptID`) REFERENCES `department` (`deptID`);
+
+--
+-- Constraints for table `event`
+--
+ALTER TABLE `event`
+  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`tournamentManager`) REFERENCES `tournamentmanager` (`userName`);
+
+--
+-- Constraints for table `tournamentmanager`
+--
+ALTER TABLE `tournamentmanager`
+  ADD CONSTRAINT `tournamentmanager_ibfk_1` FOREIGN KEY (`deptID`) REFERENCES `department` (`deptID`),
+  ADD CONSTRAINT `tournamentmanager_ibfk_2` FOREIGN KEY (`userName`) REFERENCES `regis` (`userName`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
